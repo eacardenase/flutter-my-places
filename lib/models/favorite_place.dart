@@ -1,0 +1,9 @@
+class FavoritePlace {
+  const FavoritePlace({
+    required this.id,
+    required this.title,
+  });
+
+  final String id;
+  final String title;
+}
