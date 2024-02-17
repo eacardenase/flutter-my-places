@@ -1,19 +1,19 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:my_places/models/favorite_place.dart';
+import 'package:my_places/models/place.dart';
 
-class FavoritePlaceNotifier extends StateNotifier<List<FavoritePlace>> {
-  FavoritePlaceNotifier() : super([]);
+class UserPlacesNotifier extends StateNotifier<List<Place>> {
+  UserPlacesNotifier() : super(const []);
 
-  void addPlace(FavoritePlace place) {
+  void addPlace(Place place) {
     state = [
-      ...state,
       place,
+      ...state,
     ];
   }
 }
 
-final favoritePlacesNotifier =
-    StateNotifierProvider<FavoritePlaceNotifier, List<FavoritePlace>>(
-  (ref) => FavoritePlaceNotifier(),
+final userPlacesNotifier =
+    StateNotifierProvider<UserPlacesNotifier, List<Place>>(
+  (ref) => UserPlacesNotifier(),
 );

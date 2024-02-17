@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:my_places/models/favorite_place.dart';
+import 'package:my_places/models/place.dart';
 import 'package:my_places/providers/favorite_places_provider.dart';
 
 class NewPlaceForm extends ConsumerStatefulWidget {
@@ -26,12 +26,11 @@ class _NewPlaceForm extends ConsumerState<NewPlaceForm> {
 
     formState.save();
 
-    final newFavoritePlace = FavoritePlace(
-      id: DateTime.now().toString(),
+    final newFavoritePlace = Place(
       title: _enteredTitle,
     );
 
-    ref.read(favoritePlacesNotifier.notifier).addPlace(newFavoritePlace);
+    ref.read(userPlacesNotifier.notifier).addPlace(newFavoritePlace);
 
     Navigator.of(context).pop();
   }
@@ -63,7 +62,7 @@ class _NewPlaceForm extends ConsumerState<NewPlaceForm> {
               _enteredTitle = newValue!;
             },
           ),
-          const SizedBox(height: 20),
+          const SizedBox(height: 16),
           ElevatedButton.icon(
             onPressed: _saveForm,
             icon: const Icon(Icons.add),

@@ -1,29 +1,28 @@
 import 'package:flutter/material.dart';
 
-import 'package:my_places/models/favorite_place.dart';
+import 'package:my_places/models/place.dart';
 
 class PlaceDetailsScreen extends StatelessWidget {
   const PlaceDetailsScreen({
     super.key,
-    required this.favoritePlace,
+    required this.place,
   });
 
-  final FavoritePlace favoritePlace;
+  final Place place;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(favoritePlace.title),
+        title: Text(place.title),
         centerTitle: true,
       ),
       body: Center(
         child: Text(
-          favoritePlace.title,
-          style: TextStyle(
-            color: Theme.of(context).colorScheme.onBackground,
-            fontSize: 20,
-          ),
+          place.title,
+          style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                color: Theme.of(context).colorScheme.onBackground,
+              ),
         ),
       ),
     );

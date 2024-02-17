@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:my_places/widgets/new_place_form.dart';
+
+import 'package:my_places/widgets/add_place_form.dart';
 
 class AddPlaceScreen extends StatelessWidget {
   const AddPlaceScreen({super.key});
@@ -13,8 +14,8 @@ class AddPlaceScreen extends StatelessWidget {
         ),
         centerTitle: true,
       ),
-      body: const Padding(
-        padding: EdgeInsets.all(16),
+      body: const SingleChildScrollView(
+        padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
         child: NewPlaceForm(),
       ),
     );

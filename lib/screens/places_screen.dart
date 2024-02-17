@@ -4,41 +4,34 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:my_places/providers/favorite_places_provider.dart';
 import 'package:my_places/screens/add_place_screen.dart';
-import 'package:my_places/widgets/favorite_places_list.dart';
+import 'package:my_places/widgets/places_list.dart';
 
-class FavoritePlacesScreen extends ConsumerStatefulWidget {
-  const FavoritePlacesScreen({super.key});
+class PlacesScreen extends ConsumerWidget {
+  const PlacesScreen({super.key});
 
   @override
-  ConsumerState<FavoritePlacesScreen> createState() =>
-      _FavoritePlacesScreenState();
-}
-
-class _FavoritePlacesScreenState extends ConsumerState<FavoritePlacesScreen> {
-  @override
-  Widget build(BuildContext context) {
-    final favoritePlaces = ref.watch(favoritePlacesNotifier);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final userPlaces = ref.watch(userPlacesNotifier);
 
     Widget mainContent = Center(
       child: Text(
         'No places added yet',
-        style: TextStyle(
-          color: Theme.of(context).colorScheme.onBackground,
-          fontSize: 16,
-        ),
+        style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+              color: Theme.of(context).colorScheme.onBackground,
+            ),
       ),
     );
 
-    if (favoritePlaces.isNotEmpty) {
-      mainContent = FavoritePlacesList(
-        favoritePlaces: favoritePlaces,
+    if (userPlaces.isNotEmpty) {
+      mainContent = PlacesList(
+        places: userPlaces,
       );
     }
 
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'My Places',
+          'Your Places',
         ),
         centerTitle: true,
         actions: [
