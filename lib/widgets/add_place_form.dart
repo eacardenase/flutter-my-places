@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:my_places/models/place.dart';
 import 'package:my_places/providers/favorite_places_provider.dart';
+import 'package:my_places/widgets/image_input.dart';
 
 class NewPlaceForm extends ConsumerStatefulWidget {
   const NewPlaceForm({super.key});
@@ -62,6 +63,9 @@ class _NewPlaceForm extends ConsumerState<NewPlaceForm> {
               _enteredTitle = newValue!;
             },
           ),
+          const SizedBox(height: 16),
+          // ImagePicker
+          const ImageInput(),
           const SizedBox(height: 16),
           ElevatedButton.icon(
             onPressed: _saveForm,
