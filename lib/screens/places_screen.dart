@@ -23,8 +23,11 @@ class PlacesScreen extends ConsumerWidget {
     );
 
     if (userPlaces.isNotEmpty) {
-      mainContent = PlacesList(
-        places: userPlaces,
+      mainContent = Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: PlacesList(
+          places: userPlaces,
+        ),
       );
     }
 
