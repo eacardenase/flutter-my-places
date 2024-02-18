@@ -20,16 +20,21 @@ class _NewPlaceForm extends ConsumerState<NewPlaceForm> {
   final _formKey = GlobalKey<FormState>();
   var _enteredTitle = '';
   File? _selectedImage;
+  PlaceLocation? _selectedLocation;
 
   void _selectImage(File image) {
     _selectedImage = image;
+  }
+
+  void _selectLocation(PlaceLocation location) {
+    _selectedLocation = location;
   }
 
   void _saveForm() {
     final formState = _formKey.currentState!;
     final formIsValid = formState.validate();
 
-    if (!formIsValid || _selectedImage == null) {
+    if (!formIsValid || _selectedImage == null || _selectedLocation == null) {
       return;
     }
 
@@ -38,6 +43,7 @@ class _NewPlaceForm extends ConsumerState<NewPlaceForm> {
     final newPlace = Place(
       title: _enteredTitle,
       image: _selectedImage!,
+      location: _selectedLocation!,
     );
 
     ref.read(userPlacesNotifier.notifier).addPlace(newPlace);
@@ -77,7 +83,9 @@ class _NewPlaceForm extends ConsumerState<NewPlaceForm> {
             onPickImage: _selectImage,
           ),
           const SizedBox(height: 16),
-          const LocationInput(),
+          LocationInput(
+            onSelectLocation: _selectLocation,
+          ),
           const SizedBox(height: 16),
           ElevatedButton.icon(
             onPressed: _saveForm,
