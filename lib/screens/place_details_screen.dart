@@ -9,6 +9,14 @@ class PlaceDetailsScreen extends StatelessWidget {
   });
 
   final Place place;
+  final _apiKey = 'AIzaSyCiHlVFXXF-U4D26rmGXZzR4ItQJ9_xIKw';
+
+  String get locationImageUrl {
+    final latitude = place.location.latitude;
+    final longitude = place.location.longitude;
+
+    return "https://maps.googleapis.com/maps/api/staticmap?center=$latitude,$longitude&zoom=16&size=600x300&maptype=roadmap&markers=color:red%7Clabel:A%7C$latitude,$longitude&key=$_apiKey";
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +32,44 @@ class PlaceDetailsScreen extends StatelessWidget {
             fit: BoxFit.cover,
             width: double.infinity,
             height: double.infinity,
+          ),
+          Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: Column(
+              children: [
+                CircleAvatar(
+                  radius: 70,
+                  backgroundImage: NetworkImage(
+                    locationImageUrl,
+                  ),
+                ),
+                Container(
+                  alignment: Alignment.center,
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 24,
+                    vertical: 16,
+                  ),
+                  decoration: const BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [
+                        Colors.transparent,
+                        Colors.black54,
+                      ],
+                    ),
+                  ),
+                  child: Text(
+                    place.location.address,
+                    style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                          color: Theme.of(context).colorScheme.onBackground,
+                        ),
+                  ),
+                )
+              ],
+            ),
           )
         ],
       ),
