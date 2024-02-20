@@ -13,13 +13,26 @@ class PlacesList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: places.length,
-      itemBuilder: (context, index) {
-        final place = places[index];
-
-        return PlaceListItem(place: place);
-      },
+    Widget mainContent = Center(
+      child: Text(
+        'No places added yet',
+        style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+              color: Theme.of(context).colorScheme.onBackground,
+            ),
+      ),
     );
+
+    if (places.isNotEmpty) {
+      mainContent = ListView.builder(
+        itemCount: places.length,
+        itemBuilder: (context, index) {
+          final place = places[index];
+
+          return PlaceListItem(place: place);
+        },
+      );
+    }
+
+    return mainContent;
   }
 }
