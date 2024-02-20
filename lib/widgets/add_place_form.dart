@@ -46,16 +46,13 @@ class _NewPlaceForm extends ConsumerState<NewPlaceForm> {
     final fileName = path.basename(_selectedImage!.path);
     final copiedImage = await _selectedImage!.copy('${appDir.path}/$fileName');
 
-    print(appDir.path);
-    print(fileName);
-
     final newPlace = Place(
       title: _enteredTitle,
       image: copiedImage,
       location: _selectedLocation!,
     );
 
-    ref.read(userPlacesNotifier.notifier).addPlace(newPlace);
+    ref.read(userPlacesProvider.notifier).addPlace(newPlace);
 
     // Checks `this.mounted`, not `context.mounted`
     if (!mounted) return;
