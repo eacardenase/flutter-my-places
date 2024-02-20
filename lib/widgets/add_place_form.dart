@@ -3,8 +3,6 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:path_provider/path_provider.dart' as syspaths;
-import 'package:path/path.dart' as path;
 
 import 'package:my_places/models/place.dart';
 import 'package:my_places/providers/favorite_places_provider.dart';
@@ -42,17 +40,11 @@ class _NewPlaceForm extends ConsumerState<NewPlaceForm> {
 
     formState.save();
 
-    final appDir = await syspaths.getApplicationDocumentsDirectory();
-    final fileName = path.basename(_selectedImage!.path);
-    final copiedImage = await _selectedImage!.copy('${appDir.path}/$fileName');
-
-    final newPlace = Place(
-      title: _enteredTitle,
-      image: copiedImage,
-      location: _selectedLocation!,
-    );
-
-    ref.read(userPlacesProvider.notifier).addPlace(newPlace);
+    ref.read(userPlacesProvider.notifier).addPlace(
+          _enteredTitle,
+          _selectedImage!,
+          _selectedLocation!,
+        );
 
     // Checks `this.mounted`, not `context.mounted`
     if (!mounted) return;
