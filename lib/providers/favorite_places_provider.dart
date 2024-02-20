@@ -5,7 +5,7 @@ import 'package:my_places/models/place.dart';
 class UserPlacesNotifier extends StateNotifier<List<Place>> {
   UserPlacesNotifier() : super(const []);
 
-  void addPlace(Place place) {
+  void addPlace(Place place) async {
     state = [
       place,
       ...state,
